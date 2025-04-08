@@ -29,9 +29,9 @@ unsigned int LEVELC_DATA[] =
     25,22,23,23,23,23,23,23,22,23,23,23,22,23,23,25,
     25,23,23,23,23,23,23,22,25,22,22,22,23,23,23,25,
     25,23,23,23,23,23,23,23,23,23,23,23,23,23,22,25,
-    25,23,23,23,23,23,22,23,23,23,22,23,23,23,23,23,
-    25,23,23,23,23,23,25,23,23,23,25,23,23,23,22,23,
-    25,22,22,22,22,22,25,23,23,23,25,22,22,22,25,22
+    25,23,23,23,23,23,22,23,23,22,23,23,23,23,23,23,
+    25,23,23,23,23,23,25,23,23,25,23,23,23,23,22,23,
+    25,22,22,22,22,22,25,23,23,25,22,22,22,22,25,22
 };
 
 LevelC::~LevelC()
@@ -121,9 +121,15 @@ void LevelC::update(float delta_time)
 {
     m_game_state.player->update(delta_time, m_game_state.player, m_game_state.enemies, ENEMY_COUNT, m_game_state.map);
     
+    bool collided = false;
+
     for (int i = 0; i < ENEMY_COUNT; i++)
     {
         m_game_state.enemies[i].update(delta_time, m_game_state.player, NULL, NULL, m_game_state.map);
+        if (m_game_state.enemies[i].check_collision(m_game_state.player))
+        {
+            collided = true;
+        }
     }
 
     if (m_game_state.player->get_position().y < -7.0f && m_game_state.player->get_position().x > 10.0f)
@@ -131,7 +137,7 @@ void LevelC::update(float delta_time)
         m_game_state.finish = true;
     }
 
-    if (m_game_state.player->check_collision(m_game_state.enemies) || (m_game_state.player->get_position().y < -7.0f && m_game_state.player->get_position().x <= 10.0f))
+    if (collided || (m_game_state.player->get_position().y < -7.0f && m_game_state.player->get_position().x <= 10.0f))
     {
         m_game_state.restart = true;
     }
