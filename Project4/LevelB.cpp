@@ -1,13 +1,3 @@
-/**
-* Author: [Your name here]
-* Assignment: Rise of the AI
-* Date due: 2025-04-05, 11:59pm
-* I pledge that I have completed this assignment without
-* collaborating with anyone else, in conformance with the
-* NYU School of Engineering Policies and Procedures on
-* Academic Misconduct.
-**/
-
 #include "LevelB.h"
 #include "Utility.h"
 
@@ -26,8 +16,8 @@ unsigned int LEVELB_DATA[] =
     25,23,23,23,23,23,23,23,23,23,23,23,23,23,
     25,23,23,23,23,23,23,23,23,23,23,23,23,23,
     25,23,23,23,23,23,23,23,23,23,23,23,23,23,
-    25,23,23,23,23,22,23,23,22,23,23,23,23,23,
-    25,23,23,23,23,25,22,22,25,22,23,23,23,22,
+    25,23,23,23,23,22,23,23,23,23,23,23,23,23,
+    25,23,23,23,23,25,22,22,22,22,23,23,23,22,
     25,23,23,22,23,23,23,23,23,23,23,23,23,25,
     25,22,22,25,23,23,23,23,22,22,22,22,22,25,
     25,25,25,25,23,23,23,23,25,25,25,25,25,25
@@ -95,7 +85,7 @@ void LevelB::initialise()
     }
 
 
-    m_game_state.enemies[0].set_position(glm::vec3(9.0f, -5.0f, 0.0f));
+    m_game_state.enemies[0].set_position(glm::vec3(8.0f, -5.0f, 0.0f));
     m_game_state.enemies[0].set_movement(glm::vec3(0.0f));
     m_game_state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
 
@@ -112,6 +102,7 @@ void LevelB::initialise()
     Mix_PlayMusic(m_game_state.bgm, -1);
     Mix_VolumeMusic(64.0f);
     
+    m_game_state.jump_sfx = Mix_LoadWAV("assets/bounce.wav");
     m_game_state.die_sfx = Mix_LoadWAV("assets/die.wav");
     m_game_state.next_sfx = Mix_LoadWAV("assets/next.wav");
 }
